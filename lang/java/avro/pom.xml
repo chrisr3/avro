@@ -44,6 +44,14 @@
       *
     </osgi.import>
     <osgi.export>org.apache.avro*;version="${project.version}"</osgi.export>
+    <osgi.serviceloader>
+        osgi.extender;filter:="(&amp;(osgi.extender=osgi.serviceloader.registrar)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))";resolution:=optional
+    </osgi.serviceloader>
+    <osgi.serviceloader.requires>
+        osgi.extender;filter:="(&amp;(osgi.extender=osgi.serviceloader.processor)(version>=1.0.0)(!(version>=2.0.0)))";resolution:=optional,
+        osgi.serviceloader;filter:="(osgi.serviceloader=org.apache.avro.Conversion)";osgi.serviceloader="org.apache.avro.Conversion";resolution:=optional,
+        osgi.serviceloader;filter:="(osgi.serviceloader=org.apache.avro.LogicalTypes$LogicalTypeFactory)";osgi.serviceloader="org.apache.avro.LogicalTypes$LogicalTypeFactory";resolution:=optional
+    </osgi.serviceloader.requires>
   </properties>
 
   <build>
